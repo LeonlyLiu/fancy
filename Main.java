@@ -15,7 +15,6 @@ public class Main {
 	private RegulatedMotor rightMotor  = Motor.B;
 	private RegulatedMotor leftMotor  = Motor.C;
 
-	float middleValue = 0.40F;
 	//遅い速度
 	int lowSpeed = 200;
 	//速い速度
