@@ -7,7 +7,8 @@ import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.RegulatedMotor;
 
-public class Main {
+public class Main 
+{
 
 	private TouchSensor touch = new TouchSensor(SensorPort.S1);
 	private ColorSensor rightColor = new ColorSensor(SensorPort.S2);
