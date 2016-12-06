@@ -24,29 +24,41 @@ public class Main {
 	//回転角度
 	private final int turnAngle = 720;
 
-	public void main(String[] args) {
+	private final float lowValue = 0.05F;
 
-		while (! touch.isPressed ()) {
+	private final float middleValue = 0.10F;
 
-//			ColorTypes LeftColorType = ColorTypes.;
-//			ColorTypes RightColorType = getColor(rightColor);
+	private final float highValue = 0.15F;
+
+	public void main(String[] args)
+	{
+
+		while (! touch.isPressed ())
+		{
 
 			// 黒＆黒
-			if (getColor(leftColor ) == 3 && getColor(rightColor) == 3) {}
+			if (getColor(leftColor ) == ColorTypes.BLACK && getColor(rightColor) == ColorTypes.BLACK)
+			{
+				rightMotor.stop();
+				leftMotor.stop();
+			}
 			// 黒＆白
-			else if (getColor(leftColor) == 3 && getColor(rightColor) == 4) {
+			else if (getColor(leftColor) == ColorTypes.BLACK && getColor(rightColor) == ColorTypes.WHITE)
+			{
 				motorSetSpeed(lowSpeed, highSpeed);
 				motorForward();
 				detectColor(getColor(leftColor));
 			}
 			// 白＆黒
-			else if (getColor(leftColor) == 4 && getColor(rightColor) == 3) {
+			else if (getColor(leftColor) == ColorTypes.WHITE && getColor(rightColor) == ColorTypes.BLACK)
+			{
 				motorSetSpeed(highSpeed, lowSpeed);
 				motorForward();
 				detectColor(getColor(leftColor));
 			}
 			// 白＆白
-			else if (getColor(leftColor) == 4 && getColor(rightColor) == 4) {
+			else if (getColor(leftColor) == ColorTypes.WHITE && getColor(rightColor) == ColorTypes.WHITE)
+			{
 				motorSetSpeed(highSpeed, highSpeed);
 				motorForward();
 				detectColor(getColor(leftColor));
@@ -54,47 +66,50 @@ public class Main {
 		}
 	}
 
-	private void motorSetSpeed(int leftMotorSpeed, int rightMotorSpeed) {
+	private void motorSetSpeed(int leftMotorSpeed, int rightMotorSpeed)
+	{
 		leftMotor.setSpeed(leftMotorSpeed);
 		rightMotor.setSpeed(rightMotorSpeed);
 	}
 
-	private void motorForward() {
+	private void motorForward()
+	{
 		leftMotor.forward();
 		rightMotor.forward();
 	}
 
-	private int getColor(ColorSensor color) {
+	private ColorTypes getColor(ColorSensor color)
+	{
 		//赤を認識
-		if (color.getBlue() < 0.05F && color.getRed() > 0.15F && color.getGreen() < 0.05F) return 1;
+		if (color.getBlue() < lowValue && color.getRed() > highValue && color.getGreen() < lowValue) return ColorTypes.RED;
 		//緑を認識
-		else if (color.getBlue() < 0.05F && color.getRed() < 0.06F && color.getGreen() > 0.11F) return 2;
+		else if (color.getBlue() < lowValue && color.getRed() < lowValue && color.getGreen() > highValue) return ColorTypes.GREEN;
 		//黒を認識
-		else if (color.getBlue() < 0.04F && color.getRed() < 0.04F && color.getGreen() < 0.04F) return 3;
+		else if (color.getBlue() < lowValue && color.getRed() < lowValue && color.getGreen() < lowValue) return ColorTypes.BLACK;
 		//白を認識
-		else if (color.getBlue() > 0.10F && color.getRed() > 0.10F && color.getGreen() > 0.10F) return 4;
+		else if (color.getBlue() > middleValue && color.getRed() > middleValue && color.getGreen() > middleValue) return ColorTypes.WHITE;
 
-		return 0;
+		return null;
+
 	}
 
-	private void detectColor(int color) {
+	private void detectColor(ColorTypes color)
+	{
 		//赤の場合
-		if (color == 1) fullTurn();//一回転
+		if (color == ColorTypes.RED) fullTurn();//一回転
 		//緑の場合
-		if (color == 2) Sound.playTone(200, 100);//音を鳴らす
+		if (color == ColorTypes.GREEN) Sound.playTone(200, 100);//音を鳴らす
 	}
-
-//	private void foundLine() {
-//
-//	}
 
 	//一回転をする
-	private void fullTurn() {
+	private void fullTurn()
+	{
 		leftMotor.resetTachoCount();
 		leftMotor.setSpeed(turnSpeed);
 		rightMotor.setSpeed(turnSpeed);
 
-		while (leftMotor.getTachoCount() < turnAngle) {
+		while (leftMotor.getTachoCount() < turnAngle)
+		{
 			leftMotor.forward();
 			rightMotor.backward();
 		}
