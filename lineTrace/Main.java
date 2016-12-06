@@ -1,3 +1,6 @@
+//劉
+//2016.12.06
+//v1.0
 package lineTrace;
 
 import jp.ac.kagawa_u.infoexpr.Sensor.ColorSensor;
