@@ -16,7 +16,7 @@ public class TargetDetection
 	コンストラクタ
 	------------------------------------------------------*/
 
-	public TargetDetection() throws InstantiationException
+	public TargetDetection()
 	{
 	}
 

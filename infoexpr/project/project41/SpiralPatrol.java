@@ -12,11 +12,18 @@ public class SpiralPatrol
 	クラス変数
 	------------------------------------------------------*/
 
+	private TargetLock targetLock;
+
 	private int powerLeftInCurve;
 	private int powerRightInCurve;
+
 	private int diffPowerLeft;
 	private int diffPowerRight;
+
 	private int delayTime;
+
+	private float limitDistance;
+	private float bufferDistanc;
 
 	/*------------------------------------------------------
 	コンストラクタ
@@ -25,6 +32,7 @@ public class SpiralPatrol
 	public SpiralPatrol()
 	{
 		TargetAccess.wheelActuator = new WheelActuator();
+		targetLock = new TargetLock(limitDistance, bufferDistanc);
 	}
 
 	/*------------------------------------------------------
@@ -33,7 +41,7 @@ public class SpiralPatrol
 
 	public void traveling()
 	{
-		while (true)
+		while (targetLock.lockWithDistance(limitDistance, bufferDistanc))
 		{
 			drive();
 		}

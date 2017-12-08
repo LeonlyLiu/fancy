@@ -14,12 +14,18 @@ public class TargetAccess
 	/*------------------------------------------------------
 	クラス変数
 	------------------------------------------------------*/
-
+	// ---- 機構
 	public static WheelActuator wheelActuator;
 	public static TargetDetection targetDetection;
 
+	// ---- 機素
 	public static Button button;
 	public static Timer timer;
+
+	// ---- 任務
+	public static SpiralPatrol spiralPatrol;
+	public static NeighborStop neighborStop;
+	public static RapidAccess rapidAccess;
 
 	/*------------------------------------------------------
 	コンストラクタ
@@ -29,8 +35,14 @@ public class TargetAccess
 	{
 		wheelActuator = new WheelActuator();
 		targetDetection = new TargetDetection();
+
+		spiralPatrol = new SpiralPatrol();
+		neighborStop = new NeighborStop();
+		rapidAccess = new RapidAccess();
+
 		button = new Button();
 		timer = new Timer();
+
 	}
 
 	/*------------------------------------------------------
@@ -48,7 +60,9 @@ public class TargetAccess
 
 	public void doGame()
 	{
-
+		spiralPatrol.traveling();
+		rapidAccess.closeStraight();
+		neighborStop.closeAndStop();
 	}
 
 }

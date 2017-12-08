@@ -27,6 +27,10 @@ public class TargetLock implements Runnable
 		this.bufferDistance = bufferDistance;
 	}
 
+	/*------------------------------------------------------
+	ラン
+	------------------------------------------------------*/
+
 	public void run()
 	{
 		if (TargetAccess.targetDetection.getDistance() < limitDistance + bufferDistance)
@@ -39,7 +43,7 @@ public class TargetLock implements Runnable
 	distanceで目標を定位
 	------------------------------------------------------*/
 
-	public boolean LockWithDistance(float limitDistance, float bufferDistance)
+	public boolean lockWithDistance(float limitDistance, float bufferDistance)
 	{
 		if (TargetAccess.targetDetection.getDistance() < limitDistance + bufferDistance)
 		{

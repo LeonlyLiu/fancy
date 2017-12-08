@@ -16,6 +16,10 @@ public class TargetRound
 	public static WheelActuator wheelActuator;
 	public static LineDetection lineDetection;
 
+	public static FeedbackTraveling feedbackTraveling;
+	public static LineComback lineComback;
+	public static RevolutionTraveling revolutionTraveling;
+
 	/*------------------------------------------------------
 	コンストラクタ
 	------------------------------------------------------*/
@@ -24,6 +28,10 @@ public class TargetRound
 	{
 		wheelActuator = new WheelActuator();
 		lineDetection = new LineDetection();
+
+		feedbackTraveling = new FeedbackTraveling(wheelActuator, lineDetection);
+		lineComback = new LineComback();
+		revolutionTraveling = new RevolutionTraveling();
 	}
 
 	/*------------------------------------------------------
@@ -41,6 +49,8 @@ public class TargetRound
 
 	public void doGame()
 	{
-
+		feedbackTraveling.traveling();
+		revolutionTraveling.revolution();
+		lineComback.backToLine();
 	}
 }

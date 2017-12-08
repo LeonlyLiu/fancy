@@ -13,13 +13,15 @@ public class RevolutionTraveling
 	クラス変数
 	------------------------------------------------------*/
 
+	private TargetSeek targetSeek;
+
 	/*------------------------------------------------------
 	コンストラクタ
 	------------------------------------------------------*/
 
 	public RevolutionTraveling()
 	{
-
+		targetSeek = new TargetSeek();
 	}
 
 	/*------------------------------------------------------
@@ -28,13 +30,13 @@ public class RevolutionTraveling
 
 	public void revolution()
 	{
-		while (true)
+		while (!targetSeek.seekByColor())
 		{
-			Traveling();
+			traveling();
 		}
 	}
 
-	public void Traveling()
+	public void traveling()
 	{
 		TargetRound.wheelActuator.runCurve(curvePowerL, curvePowerR);
 

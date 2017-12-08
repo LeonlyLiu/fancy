@@ -10,8 +10,8 @@ public class LineComback
 	クラス変数
 	------------------------------------------------------*/
 
-	private TargetSeek targetSeek;
 	private FeedbackTraveling feedbackTraveling;
+
 	private int straightPower;
 	private int straightTime;
 
@@ -21,22 +21,20 @@ public class LineComback
 
 	public LineComback()
 	{
-		targetSeek = new TargetSeek();
 		feedbackTraveling = new FeedbackTraveling(TargetRound.wheelActuator, TargetRound.lineDetection);
 	}
 
 	/*------------------------------------------------------
-	コンストラクタ
+	復帰動作のあとに検知走行
 	------------------------------------------------------*/
 
 	public void backToLine()
 	{
-		if (targetSeek.seekByColor())
-		{
-			// --- 短距離前進
-			TargetRound.wheelActuator.runStraightByTime(straightPower, straightTime);
-			// ---
-			feedbackTraveling.travelingUntilTime();
-		}
+
+		// --- 短距離前進
+		TargetRound.wheelActuator.runStraightByTime(straightPower, straightTime);
+		// ---
+		feedbackTraveling.travelingUntilTime();
+
 	}
 }

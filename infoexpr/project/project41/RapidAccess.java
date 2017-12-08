@@ -40,7 +40,7 @@ public class RapidAccess
 	{
 		while (!TargetAccess.button.IsEscapeButtonDown())
 		{
-			if (targetLock.LockWithDistance(targetDistance, bufferDistance))
+			if (targetLock.lockWithDistance(targetDistance, bufferDistance))
 			{
 				TargetAccess.wheelActuator.runStraight(forwardPower);
 				TargetAccess.timer.delay(delayTime);

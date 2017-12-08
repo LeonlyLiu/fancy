@@ -20,6 +20,8 @@ public class FeedbackTraveling
 	private WheelActuator wheelActuator;
 	private LineDetection lineDetection;
 
+	private TargetSeek targetSeek;
+
 	// ---- 検知走行のパラメタ
 	// -- 前方直進
 	private int powerStraight = 720;
@@ -35,6 +37,10 @@ public class FeedbackTraveling
 	// -- 制限時間
 	private final int timeLimit = 2000;
 
+	// -- 目標距離
+	private float limitDistance;
+	private float bufferDistance;
+
 	/*------------------------------------------------------
 	コンストラクタ
 	------------------------------------------------------*/
@@ -47,6 +53,7 @@ public class FeedbackTraveling
 	{
 		this.wheelActuator = wheelActuator;
 		this.lineDetection = lineDetection;
+		targetSeek = new TargetSeek();
 	}
 
 	/*------------------------------------------------------
@@ -56,7 +63,7 @@ public class FeedbackTraveling
 	public void traveling()
 	{
 		// ---- 検知走行
-		while (true)
+		while (targetSeek.seekBySonic(limitDistance, bufferDistance))
 		{
 			this.driving();
 		}

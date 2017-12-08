@@ -30,9 +30,9 @@ public class NeighborStop
 	近接検知と停止
 	------------------------------------------------------*/
 
-	public void CloseDetector()
+	public void closeAndStop()
 	{
-		while (targetLock.LockWithDistance(limitDistance, bufferDistance))
+		while (targetLock.lockWithDistance(limitDistance, bufferDistance))
 		{
 		}
 		TargetAccess.wheelActuator.stopForce();
