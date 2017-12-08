@@ -4,7 +4,6 @@ import infoexpr.Library.Enums.MonoPattern;
 import infoexpr.Library.Mechanism.Actuator.WheelActuator;
 import infoexpr.Library.Mechanism.Detection.LineDetection;
 import infoexpr.project.Project31.BeepWithGreen;
-import infoexpr.project.Project31.StopByTower;
 
 /*=============================================================
 個別任務  目標周回  検知走行
@@ -40,6 +39,10 @@ public class FeedbackTraveling
 	コンストラクタ
 	------------------------------------------------------*/
 
+	public FeedbackTraveling()
+	{
+	}
+
 	public FeedbackTraveling(final WheelActuator wheelActuator, final LineDetection lineDetection)
 	{
 		this.wheelActuator = wheelActuator;
@@ -60,30 +63,6 @@ public class FeedbackTraveling
 	}
 
 	/*------------------------------------------------------
-	検知走行(衝突まで)
-	------------------------------------------------------*/
-
-	public void travelingUntilTouch()
-	{
-
-		// ---- 検知走行
-		Thread stopByTower = new Thread(new StopByTower());
-
-		this.traveling();
-		stopByTower.start();
-
-		try
-		{
-			stopByTower.join();
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace(System.out);
-		}
-
-		wheelActuator.stopForce();
-	}
-
-	/*------------------------------------------------------
 	検知走行(時間まで)
 	------------------------------------------------------*/
 
@@ -96,30 +75,6 @@ public class FeedbackTraveling
 		this.traveling();
 
 		wheelActuator.untilTime(timeLimit);
-		wheelActuator.stopForce();
-
-	}
-
-	/*------------------------------------------------------
-	検知走行(緑タイルまで)
-	------------------------------------------------------*/
-
-	public void travelingUntilGreen()
-	{
-		// ---- 検知走行
-		Thread beepWithGreen = new Thread(new BeepWithGreen());
-
-		beepWithGreen.start();
-		this.traveling();
-
-		try
-		{
-			beepWithGreen.join();
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace(System.out);
-		}
-
 		wheelActuator.stopForce();
 
 	}

@@ -6,6 +6,9 @@ package infoexpr.project.project42;
 
 public class RevolutionTraveling
 {
+	private int curvePowerR;
+	private int curvePowerL;
+
 	/*------------------------------------------------------
 	クラス変数
 	------------------------------------------------------*/
@@ -16,5 +19,24 @@ public class RevolutionTraveling
 
 	public RevolutionTraveling()
 	{
+
+	}
+
+	/*------------------------------------------------------
+	公転
+	------------------------------------------------------*/
+
+	public void revolution()
+	{
+		while (true)
+		{
+			Traveling();
+		}
+	}
+
+	public void Traveling()
+	{
+		TargetRound.wheelActuator.runCurve(curvePowerL, curvePowerR);
+
 	}
 }

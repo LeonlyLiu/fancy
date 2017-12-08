@@ -10,15 +10,31 @@ public class NeighborStop
 	クラス変数
 	------------------------------------------------------*/
 
+	// ---- 機構
+	private TargetLock targetLock;
+
+	// ---- 距離パラメタ
+	private float limitDistance = 40.0F;
+	private float bufferDistance = 10.0F;
+
 	/*------------------------------------------------------
 	コンストラクタ
 	------------------------------------------------------*/
 
 	public NeighborStop()
 	{
+		targetLock = new TargetLock();
 	}
 
 	/*------------------------------------------------------
-	近接検知
+	近接検知と停止
 	------------------------------------------------------*/
+
+	public void CloseDetector()
+	{
+		while (targetLock.LockWithDistance(limitDistance, bufferDistance))
+		{
+		}
+		TargetAccess.wheelActuator.stopForce();
+	}
 }
